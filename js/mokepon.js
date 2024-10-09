@@ -51,19 +51,19 @@ function seleccionarMascotaEnemigo(){
 
 
 function ataqueFuego(){
-    ataqueJugador = 'fuego';
+    ataqueJugador = 'FUEGO';
     ataqueAleatorioEnemigo();
 }
 
 
 function ataqueAgua(){
-    ataqueJugador = 'agua';
+    ataqueJugador = 'AGUA';
     ataqueAleatorioEnemigo();
 }
 
 
 function ataqueTierra(){
-    ataqueJugador = 'tierra';
+    ataqueJugador = 'TIERRA';
     ataqueAleatorioEnemigo();
 }
 
@@ -72,23 +72,39 @@ function ataqueAleatorioEnemigo(){
     let ataqueAleatorio = aleatorio(1,3);
 
     if(ataqueAleatorio == 1){
-        ataqueEnemigo  = 'Fuego';
+        ataqueEnemigo  = 'FUEGO';
     }else if(ataqueAleatorio == 2){
-        ataqueEnemigo = 'Agua';
+        ataqueEnemigo = 'AGUA';
     }else{
-        ataqueEnemigo = 'Tierra';
+        ataqueEnemigo = 'TIERRA';
     }
 
-    crearMensaje()
+    combate();
 
 }
 
 
-function crearMensaje(){
+
+function combate(){
+    if (ataqueEnemigo == ataqueJugador) {
+        crearMensaje("EMPATE")
+      } else if (ataqueJugador == 'FUEGO' && ataqueEnemigo == 'TIERRA') {
+        crearMensaje("GANASTE")
+      } else if (ataqueJugador == 'AGUA' && ataqueEnemigo == 'FUEGO') {
+        crearMensaje("GANASTE")
+      } else if (ataqueJugador == 'TIERRA' && ataqueEnemigo == 'AGUA') {
+        crearMensaje("GANASTE")
+      } else {
+        crearMensaje("PERDISTE")
+      }
+}
+
+
+function crearMensaje(resultado){
     let sectionMensajes = document.getElementById('mensajes')
 
     let parrafo = document.createElement('p');
-    parrafo.innerHTML = 'Tu mascota ataco con ' + ataqueJugador + ', la mascota del enemigo ataco con ' +  ataqueEnemigo + ' - Pendiente';
+    parrafo.innerHTML = 'Tu mascota ataco con ' + ataqueJugador + ', la mascota del enemigo ataco con ' +  ataqueEnemigo + ' - ' +  resultado;
 
     sectionMensajes.appendChild(parrafo);
 }
