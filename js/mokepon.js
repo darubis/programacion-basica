@@ -110,6 +110,17 @@ function combate(){
         vidasJugador--;
         spanVidasJugador.innerHTML = vidasJugador
       }
+
+      revisarVidas();
+}
+
+
+function revisarVidas(){
+    if(vidasEnemigo == 0){
+        crearMensajeFinal("Felicitaciones! Ganaste");
+    }else if(vidasJugador == 0){
+        crearMensajeFinal("Lo siento! Perdiste");
+    }
 }
 
 
@@ -122,6 +133,14 @@ function crearMensaje(resultado){
     sectionMensajes.appendChild(parrafo);
 }
 
+function crearMensajeFinal(resultadoFinal){
+    let sectionMensajes = document.getElementById('mensajes')
+
+    let parrafo = document.createElement('p');
+    parrafo.innerHTML = resultadoFinal;
+
+    sectionMensajes.appendChild(parrafo);
+}
 
 function aleatorio(min, max){
     return Math.floor(Math.random() * (max - min + 1) + min);
